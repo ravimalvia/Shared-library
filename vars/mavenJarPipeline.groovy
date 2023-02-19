@@ -7,14 +7,14 @@ def call(String githubUrl ){
 				 git "${githubUrl}"		
 				}
 			}
-			stage("second"){
+			stage("Build Step"){
 				steps{
-				echo "its second steps"
+				sh 'mvn clean package'
 				}
 			}
-			stage("third"){
+			stage("Test Step"){
 				steps{
-				echo "its third steps"
+				sh 'mvn test package'
 				}
 			}
 			stage("fourth"){
