@@ -13,7 +13,7 @@ def call(String githubUrl ){
 			}
 			stage("build"){
 				steps {
-				sh 'sudo docker build -t react_app:${BUILD_NUMBER}'
+				sh 'sudo docker build -t react_app:${BUILD_NUMBER} . ' 
 				sh 'sudo docker tag react_app:${BUILD_NUMBER} ravimalvia/react_app:${BUILD_NUMBER}'
 				}
 			}
