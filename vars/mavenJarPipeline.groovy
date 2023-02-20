@@ -30,7 +30,7 @@ def call(String githubUrl ){
 				steps{
 				sh 'echo $DOCKERHUB_CRED_PSW | docker login -u $DOCKERHUB_CRED_USR --password-stdin'
 				
-				sh 'docker push ravimalvia/java_app:${BUILD_NUMBER}'
+				sh 'sudo docker push ravimalvia/java_app:${BUILD_NUMBER}'
 				}
 			}
 			stage('Deploy Docker container') {
