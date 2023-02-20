@@ -1,6 +1,6 @@
 def call(String githubUrl ){
 	pipeline {
-		agent { label 'slave'}
+		agent { label 'slave1'}
 		stages{
 			stage('Code Download'){
 				steps{
