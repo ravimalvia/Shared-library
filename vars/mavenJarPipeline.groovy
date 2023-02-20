@@ -26,7 +26,6 @@ def call(String githubUrl ){
 				//sh 'ls'
 				//sh 'pwd'
 				//sh 'whoami'
-				sh 'docker 
 				sh 'docker build -t ravimalvia/java_app:${BUILD_NUMBER} .'
 				
 				}
