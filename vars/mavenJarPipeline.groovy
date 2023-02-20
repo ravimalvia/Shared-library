@@ -1,6 +1,6 @@
 def call(String githubUrl ){
 	pipeline {
-		agent { label 'slave'}
+		agent { label 'slave1'}
 		
 		environment {
 		DOCKERHUB_CRED = credentials('DOCKERHUB')	
@@ -26,6 +26,7 @@ def call(String githubUrl ){
 				//sh 'ls'
 				//sh 'pwd'
 				//sh 'whoami'
+				sh 'docker 
 				sh 'docker build -t ravimalvia/java_app:${BUILD_NUMBER} .'
 				
 				}
