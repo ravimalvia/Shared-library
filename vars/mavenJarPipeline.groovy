@@ -11,14 +11,9 @@ def call(String githubUrl ){
 				 git "${githubUrl}"		
 				}
 			}
-			stage("Build Step"){
+			stage("Maven build Stage"){
 				steps{
 				sh 'mvn clean package'
-				}
-			}
-			stage("Test Step"){
-				steps{
-				sh 'mvn test package'
 				}
 			}
 			stage("Build Image"){
