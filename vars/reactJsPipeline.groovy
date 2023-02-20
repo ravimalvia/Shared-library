@@ -1,32 +1,36 @@
 def call(String githubUrl ){
 	pipeline {
 		agent { label 'slave1'}
+		environment {
+                DOCKERHUB_CRED = credentials('DOCKERHUB')
+                }
+
 		stages{
 			stage('Code Download'){
 				steps{
 				 git "${githubUrl}"		
 				}
 			}
-			stage("second"){
+			stage("build"){
 				steps{
-				echo "its second steps"
+				sh 'sudo docker build -t react_app:${BUILD_NUMBER}'
+				sh 'sudo docker tag react_app:${BUILD_NUMBER} ravimalvia/react_app:${BUILD_NUMBER}'
 				}
 			}
-			stage("third"){
+			
+			stage("docker login and upload to dockerhub"){
 				steps{
-				echo "its third steps"
+				sh 'sudo echo $DOCKERHUB_CRED_PSW | docker login -u $DOCKERHUB_CRED_USR --password-stdin'
+				sh 'sudo docker push ravimalvia/react_app:${BUILD_NUMBER}'
 				}
 			}
-			stage("fourth"){
+			stage("deploy"){
 				steps{
-				echo "its fourth steps"
+				sh 'docker run -dit -p 3000:3000 --name webapp react_app:${BUILD_NUMBER}'
 				}
 			}
-			stage("fifth"){
-				steps{
-				echo "its second steps"
-				}
-			}
+			
+		
 		}
 	
 	}
