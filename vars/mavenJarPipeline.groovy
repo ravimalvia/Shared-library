@@ -21,7 +21,7 @@ def call(String githubUrl ){
 				sh 'mvn test package'
 				}
 			}
-			stage(""){
+			stage("dockerhub login"){
 				steps{
 				echo "$DOCKERHUB_CRED"
 				}
