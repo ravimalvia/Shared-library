@@ -26,6 +26,8 @@ def call(String githubUrl ){
 				sh 'ls'
 				sh 'pwd'
 				sh 'whoami'
+				sh 'docker build -t ravimalvia/java_app:v1 .'
+				
 				}
 			}
 			stage("Dockerhub login"){
