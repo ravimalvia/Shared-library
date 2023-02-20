@@ -21,14 +21,16 @@ def call(String githubUrl ){
 				sh 'mvn test package'
 				}
 			}
-			stage("dockerhub login"){
+			stage("Build Image"){
 				steps{
-				echo "$DOCKERHUB_CRED"
+				sh 'ls'
+				sh 'pwd'
+				sh 'whoami'
 				}
 			}
-			stage("fifth"){
+			stage("Dockerhub login"){
 				steps{
-				echo "its fifth steps"
+				sh 'echo "DOCKERHUB_CRED_PSW | docker login -u $DOCKERHUB_CRED_USR --password-stdin'
 				}
 			}
 		}
