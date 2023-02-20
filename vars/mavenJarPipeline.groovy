@@ -1,6 +1,10 @@
 def call(String githubUrl ){
 	pipeline {
 		agent { label 'slave'}
+		
+		environment {
+		DOCKERHUB_CRED = credentials('DOCKERHUB')	
+		}
 		stages{
 			stage('Code Download'){
 				steps{
@@ -17,9 +21,9 @@ def call(String githubUrl ){
 				sh 'mvn test package'
 				}
 			}
-			stage("fourth"){
+			stage(""){
 				steps{
-				echo "its fourth steps"
+				echo "$DOCKERHUB_CRED"
 				}
 			}
 			stage("fifth"){
