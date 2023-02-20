@@ -22,16 +22,22 @@ def call(String githubUrl ){
 				//sh 'pwd'
 				//sh 'whoami'
 				sh 'docker build java_app:${BUILD_NUMBER} .'
+				sh 'docker tag java_app:${BUILD_NUMBER} ravimalvia/java_app:${BUILD_NUMBER}'
 				
 				}
 			}
 			stage("Dockerhub login and image push to dockerhub"){
 				steps{
 				sh 'echo $DOCKERHUB_CRED_PSW | docker login -u $DOCKERHUB_CRED_USR --password-stdin'
-				sh 'docker tag java_app:${BUILD_NUMBER} ravimalvia/java_app:${BUILD_NUMBER}'
+				
 				sh 'docker push ravimalvia/java_app:${BUILD_NUMBER}'
 				}
 			}
+			stage('Deploy Docker container') {
+               			steps {
+               			sh "docker run -d -p 8003:8080 ravimalvia/java_app:${BUILD_NUMBER}"
+ 				}
+       			 }
 			
 		}
 	
